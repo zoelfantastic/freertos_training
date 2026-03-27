@@ -1,0 +1,4 @@
+cmake :
+
+ cmake -B build -S . -DTUTORIAL=staticallocation
+ cmake --build build  
