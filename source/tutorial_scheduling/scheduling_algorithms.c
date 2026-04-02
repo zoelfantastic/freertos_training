@@ -5,8 +5,9 @@
 /* FreeRTOS includes */
 #include "FreeRTOS.h"
 #include "task.h"
+#include "timers.h"
 
-#define mainDELAY_LOOP_COUNT		( 0xffffff )
+#define mainDELAY_LOOP_COUNT		( 0xfffffff )
 
 /** Function that implements the task. */
 static void prvTaskFunction1( void *pvParameters );
@@ -22,26 +23,26 @@ static void prvTaskFunction3( void *pvParameters );
 int main( void ) {
     BaseType_t xTaskCreationResult = pdFALSE;
 
-    xTaskCreationResult = xTaskCreate( prvTaskFunction1, "Task1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL );
+    xTaskCreationResult = xTaskCreate( prvTaskFunction1, "Task1", configMINIMAL_STACK_SIZE, NULL, 2, NULL );
 
     if( xTaskCreationResult == pdFALSE )
     {
         fprintf(stderr, "Task 1 creation failed\n");
     }
 
-    xTaskCreationResult = xTaskCreate( prvTaskFunction2, "Task2", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
+    xTaskCreationResult = xTaskCreate( prvTaskFunction2, "Task2", configMINIMAL_STACK_SIZE, NULL, 2, NULL );
 
     if( xTaskCreationResult == pdFALSE )
     {
         fprintf(stderr, "Task 2 creation failed\n");
     }
 
-    // xTaskCreationResult = xTaskCreate( prvTaskFunction3, "Task3", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL );
+    xTaskCreationResult = xTaskCreate( prvTaskFunction3, "Task3", configMINIMAL_STACK_SIZE, NULL, 3, NULL );
 
-    // if( xTaskCreationResult == pdFALSE )
-    // {
-    //     fprintf(stderr, "Task 3 creation failed\n");
-    // }
+    if( xTaskCreationResult == pdFALSE )
+    {
+        fprintf(stderr, "Task 3 creation failed\n");
+    }
 
     vTaskStartScheduler();
 
@@ -65,14 +66,15 @@ void prvTaskFunction1(void *pvParameters)
     for(;;) {
         fprintf(stderr, "Task 1 is running\n");
         /* Delay for a period. */
-        for( ulCount = 0; ulCount < mainDELAY_LOOP_COUNT; ulCount++ )
-        {
-        /*
-        * This loop is just a very crude delay implementation. There is
-        * nothing to do in here. Later examples will replace this crude
-        * loop with a proper delay/sleep function.
-        */
-        }
+        vTaskDelay( pdMS_TO_TICKS( 500 ) ); /* Delay for 1000 ms. */
+        // for( ulCount = 0; ulCount < mainDELAY_LOOP_COUNT; ulCount++ )
+        // {
+        // /*
+        // * This loop is just a very crude delay implementation. There is
+        // * nothing to do in here. Later examples will replace this crude
+        // * loop with a proper delay/sleep function.
+        // */
+        // }
     }
 }
 
@@ -86,14 +88,15 @@ void prvTaskFunction2(void *pvParameters)
     for(;;) {
         fprintf(stderr, "Task 2 is running\n");
         /* Delay for a period. */
-        for( ulCount = 0; ulCount < mainDELAY_LOOP_COUNT; ulCount++ )
-        {
-        /*
-        * This loop is just a very crude delay implementation. There is
-        * nothing to do in here. Later examples will replace this crude
-        * loop with a proper delay/sleep function.
-        */
-        }
+        vTaskDelay( pdMS_TO_TICKS( 250 ) ); /* Delay for 100 ms. */
+        // for( ulCount = 0; ulCount < mainDELAY_LOOP_COUNT; ulCount++ )
+        // {
+        // /*
+        // * This loop is just a very crude delay implementation. There is
+        // * nothing to do in here. Later examples will replace this crude
+        // * loop with a proper delay/sleep function.
+        // */
+        // }
     }
 }
 
@@ -106,14 +109,15 @@ void prvTaskFunction3(void *pvParameters)
 
     for(;;) {
         fprintf(stderr, "Task 3 is running\n");
+        vTaskDelay( pdMS_TO_TICKS( 1000 ) ); /* Delay for 100 ms. */
         /* Delay for a period. */
-        for( ulCount = 0; ulCount < mainDELAY_LOOP_COUNT; ulCount++ )
-        {
-        /*
-        * This loop is just a very crude delay implementation. There is
-        * nothing to do in here. Later examples will replace this crude
-        * loop with a proper delay/sleep function.
-        */
-        }
+        // for( ulCount = 0; ulCount < mainDELAY_LOOP_COUNT; ulCount++ )
+        // {
+        // /*
+        // * This loop is just a very crude delay implementation. There is
+        // * nothing to do in here. Later examples will replace this crude
+        // * loop with a proper delay/sleep function.
+        // */
+        // }
     }
 }

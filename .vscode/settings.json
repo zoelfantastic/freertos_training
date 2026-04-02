@@ -1,0 +1,6 @@
+{
+    "mcu-debug.rtos-views.showRTOS": true,
+    "cmake.configureSettings": {
+        "TUTORIAL": "queue"
+    }
+}
