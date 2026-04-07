@@ -6,6 +6,8 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 message (STATUS "Selected tutorial: ${TUTORIAL}" )
 
+set(CMAKE_C_FLAGS_DEBUG "-g" )
+
 if( NOT DEFINED TUTORIAL )
     set( TUTORIAL createtask )
 endif()
